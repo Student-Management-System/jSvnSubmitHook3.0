@@ -11,6 +11,7 @@
 	
 	<target name="init">
 		<delete dir="${gen}"/>
+		<delete dir="testdata/filenameTest/filesNone"/>
 		
 		<mkdir dir="${gen}"/>
 		<mkdir dir="${bin}"/>
@@ -20,6 +21,7 @@
 		<mkdir dir="${jSvnCommit.dest}"/>
 		<mkdir dir="${jSvnNotifier.dest}"/>
 		<mkdir dir="${testSuite.dest}"/>
+		<mkdir dir="testdata/filenameTest/filesNone">
 	</target>
 	
 	<target name="compile" depends="init" description="compiles the class files">
@@ -125,7 +127,7 @@
 		<zip destfile="${jar}/jSvnNotifier-bin.zip" basedir="${jSvnNotifier.dest}" excludes="jSvn*CommitHook.jar"/>
 	</target>
 	
-	<target name="test" depends="compile.tests">
+	<target name="test" depends="compile.tests">	
 		<junit fork="false" forkmode="once">
 			<test name="de.uni_hildesheim.sse.javaSvnHooks.unitTests.AllTests" outfile="${test.out}"/>
 			<formatter type="xml"/>

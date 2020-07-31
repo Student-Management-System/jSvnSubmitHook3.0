@@ -1,0 +1,2 @@
+A file to submit a folder into GIT
+This folder is required for a test

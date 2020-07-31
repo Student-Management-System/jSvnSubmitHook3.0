@@ -1,0 +1,9 @@
+#!/bin/bash
+
+REPOSITORY=$1
+TRANSACTION=$2
+HOOKDIR="/path/to/this/hook" # Change this according to your setup
+
+java -jar $HOOKDIR/jSvnPreCommitHook.jar $REPOSITORY $TRANSACTION $HOOKDIR
+
+exit $?

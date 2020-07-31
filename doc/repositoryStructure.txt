@@ -1,0 +1,49 @@
+The following diagram shows an example structure of a SVN repository to use the
+hooks for. It contains two path configurations (e.g. home works) with two groups
+each.
+
+<repo_root>/
+ |
+ +> permissions
+ |
+ +> <submissionRepo - via Hook>
+     +> path0/
+     |   |
+     |   +> group1/
+     |   |   |
+     |   |   +> <content>
+     |   |
+     |   +> group2/
+     |       |
+     |       +> <content>
+     |
+     +> path1/
+         |
+         +> group1/
+         |   |
+         |   +> <content>
+         |
+         +> group2/
+             |
+             +> <content>
+ +> <reviewRepo - via Hook config>
+     +> path0/
+     |   |
+     |   +> group1/
+     |   |   |
+     |   |   +> <content>
+     |   |
+     |   +> group2/
+     |       |
+     |       +> <content>
+     |
+     +> path1/
+         |
+         +> group1/
+         |   |
+         |   +> <content>
+         |
+         +> group2/
+             |
+             +> <content>
+             

@@ -1,0 +1,26 @@
+This file describes the dependency tree of the default tests. A test can only be
+executed if the test it depends on was executed successfully.
+
+<none>
+ |
+ +> FailTest
+ |
+ +> FileSizeTest
+ |   |
+ |   +> JavaFilesTest
+ |   |
+ |   +> EclipseConfigurationTest
+ |   |   |
+ |   |   +> JavacTest
+ |   |       |
+ |   |       +> JunitTest
+ |   |       |
+ |   |       +> JavadocTest
+ |   |       |
+ |   |       +> CheckstyleTest
+ |   |
+ |   |
+ |   +> PublishFileTest
+ |   |
+ |   +> WarExportTest
+ +> JavaPackageTest

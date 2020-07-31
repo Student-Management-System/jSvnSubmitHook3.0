@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<module name="Checker">
+  <module name="TreeWalker">
+      <!--<module name="RegexpSinglelineJava">
+          <property name="format" value="[^\x00-\x7F]" />
+          <property name="message" value="Line contains non-ASCII char." />
+          <property name="ignoreComments" value="false" />
+      </module>-->
+      
+        <module name="AbstractClassName">
+            <property name="format" value="^[\x00-\x7F]+$"/>
+            <property name="severity" value="error"/>
+            <property name="ignoreModifier" value="true"/>
+        </module>
+        <module name="ConstantName">
+            <property name="format" value="^[\x00-\x7F]+$"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="LocalFinalVariableName">
+            <property name="format" value="^[\x00-\x7F]+$"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="LocalVariableName">
+            <property name="format" value="^[\x00-\x7F]+$"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="MemberName">
+            <property name="format" value="^[\x00-\x7F]+$"/>
+            <property name="applyToPublic" value="true"/>
+            <property name="applyToProtected" value="true"/>
+            <property name="applyToPackage" value="true"/>
+            <property name="applyToPrivate" value="true"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="MethodName">
+            <property name="format" value="^[\x00-\x7F]+$"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="PackageName">
+            <property name="format" value="^[\x00-\x7F]+$"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="ParameterName">
+            <property name="format" value="^[\x00-\x7F]+$"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="StaticVariableName">
+            <property name="format" value="^[\x00-\x7F]+$"/>
+            <property name="severity" value="error"/>
+        </module>
+        <module name="TypeName">
+            <property name="format" value="^[\x00-\x7F]+$"/>
+            <property name="severity" value="error"/>
+        </module>
+  </module>
+</module>

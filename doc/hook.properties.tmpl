@@ -1,0 +1,187 @@
+# Path to a directory where temporary files will be stored.
+tempDir = /tmp
+
+# Whether test results should be in XML format
+xmlOutput = true
+
+nativeTestThreads = true
+
+# Specifies how the test should handle non-default JRE mappings (NONE: ignore,
+#  WARNING: emit a warning, ERROR: stop the test with an error message).
+#  requiredJREmappingRegEx.Nr is a global or configuration local regular
+#  expression defining the proper mapping.
+nonDefaultJREmappingMode = NONE
+
+# Specifies the path to the jar archives for checkstyle.
+#  Multiple jar files can be specified with a platform dependent file delimiter.
+checkstyleJar =
+
+# Specifies the maximum file size / the maximum project size.
+#  <= 0 means no restriction.
+maxFileSize = 0
+maxProjectSize = 0
+
+# The maximum time in seconds to wait for an externally spawned process 
+# like javac after completion to gather results from the command line.
+maxProcessWait = 120
+
+# A list of regular expressions that describe files to be ignored during tests.
+ignoreRegEx.0 =
+
+# A comma separated list of usernames were tests should be skipped.
+unrestrictedUsers = 
+
+# Whether the JavaFilesTest should be enabled in pre-commit hook.
+noJavaFileAsError = false
+
+# The path to the repository where reviews are stored
+reviewRepo =
+# The username and password of that the hook will use to commit to the repo
+reviewRepo.user = submitHook
+reviewRepo.password = submitHook
+
+# The address of the web hook to notify about commits
+webHookAddress = 
+
+# Optional prefix path for relative jUnit test suites (may end with / but not 
+# needed)
+junitSuitePath =
+
+# Specifies a path configuration for the given path in the repository. 
+config0.prefix = /foobar
+config0.classpath = 
+#All path-specific settings can be pre-defined globally for convenience. For the 
+#global configuration settings, the config<nr> is then replaced by preset, e.g., 
+#the global configuration setting for all paths for config0.classpath is 
+#preset.classpath. 
+
+# Rejects all commits in pre-commit; for testing purposes
+config0.fail_pre = false
+# Fails in post-commit; for testing purposes
+config0.fail_post = false
+
+# Enables the eclipse_config test in the pre-commit hook
+config0.eclipseConfiguration_pre = false
+# Enables the eclipse_config test in the post-commit hook
+config0.eclipseConfiguration_post = false
+# Specifies the sub directory/directories in the libs subdirectory of the hook
+#  install directory
+config0.eclipseConfiguration.libSubPath = 
+# Specifies the policy if absolute classpath entries are allowed
+config0.eclipseConfiguration.allowAbsolute = false
+# Specifies the policy if every given classpath entry must exist
+config0.eclipseConfiguration.checkExistance = true
+# Specifies the policy if proper libraries are automatically added to the
+#  dynamic classpath considered while compiling the sources etc.
+config0.eclipseConfiguration.addToClasspath = true
+# Specifies the policy if the source path entry should be considered
+config0.eclipseConfiguration.considerSrcPath = true
+# Specifies the policy if the binary (destination) path entry should be
+#  considered
+config0.eclipseConfiguration.considerBinPath = true
+# Specifies the policy if matching libraries as defined below is case sensitive
+config0.eclipseConfiguration.matchCase = false
+# May specify a comma separated list of non-qualified library names that denote
+#  the allowed libraries which must then also be present in the libs
+#  subdirectory of the hook install directory. If such a file is found and
+#  matched, the file in the transaction must match the CRC checksum of the
+#  server file.
+config0.eclipseConfiguration.matchLibs =
+# May specify a comma separated list of fully qualified non-qualified Eclipse
+#  nature classes that must be present in the Eclipse project file
+config0.eclipseConfiguration.requiredNatures = org.eclipse.jdt.core.javanature
+# May specify a comma separated list of fully qualified non-qualified Eclipse
+#  builder classes that must be present in the Eclipse project file.
+config0.eclipseConfiguration.requiredBuilders = org.eclipse.jdt.core.javabuilder
+# May specify a directory relative to hook install directory or an absolute
+#  directory in which (relevant) eclipse plugins such as the PDE jars are
+#  located. If specified, automatically a plugin mapping is constructed an can
+#  matched against an associated (in the .classpath file) manifest file of the
+#  analyzed project.
+config0.eclipseConfiguration.eclipsePluginsDir =
+# May specify the jars of a certain eclipse library container. If no jars are
+#  given, the internal default values will be disabled. If the configuration
+#  keys are not given, currently the following default values will be
+#  considered:
+#  - JRE_CONTAINER is resolved to all jars included in Java (libs and
+#    subdirectories)
+#  - JUNIT_CONTAINER/4 is resolved to org.junit4, which then is resolved by
+#    the plugins mechanism mentioned above
+config0.eclipseConfiguration.container.Container = 
+# May supersede the global nonDefaultJREmappingMode.
+config0.eclipseConfiguration.nonDefaultJREmappingMode = NONE
+
+# Enables the javac test in the pre-commit hook
+config0.javac_pre = false
+# Enables the javac test in the post-commit hook
+config0.javac_post = false
+# May be used to specify additional parameters for the Java compiler
+config0.javac.params =
+# May be used to specify additional elements for the classpath
+config0.javac.classpath =
+# The directory to be searched recursively for additional libraries
+config0.javac.libDir =
+# If given, checks required commited relative folder names (Java regex)
+config0.requiredPackageRegEx = 
+# If given, checks forbidden commited relative folder names (Java regex)
+config0.forbiddenPackageRegEx = 
+
+# Enables the javadoc test in the pre-commit hook
+config0.javadoc_pre = false
+# Enables the javadoc test in the post-commit hook
+config0.javadoc_post = false
+# May be used to specify additional parameters to the javadoc generator 
+config0.javadoc.parameters =
+# May be used to specify additional elements for the classpath
+config0.javadoc.classpath =
+# The directory to be searched recursively for additional libraries 
+config0.javadoc.libDir =
+
+# Enables the checkstyle test in the pre-commit hook
+config0.checkstyle_pre = false
+# Enables the checkstyle test in the post-commit hook
+config0.checkstyle_post = false
+# Defines the file to be loaded as configuration. Paths are always interpreted
+#  with the installation directory as base.
+config0.checkstyle.config =
+# Nay be used to specify VM parameter.
+config0.checkstyle.jvmParams =
+# May be used to specify additional checkstyle parameter.
+config0.checkstyle.params =
+
+# Enables the publish test in the post-commit hook
+config0.publish = false
+# Defines regular expression the commit comment must match to enable this
+#  plugin.
+config0.publish.commentRegEx =
+# Specifies a regular expression a file within the specified file set must match
+#   to execute the command with number CNr.
+config0.publish.fileRegExCNr =
+# The command to be executed when the regular expression with number CNr matches
+#   a file in this path configuration.
+config0.publish.fileCmdCNr =
+
+# Enables the junit test in the pre-commit hook
+config0.junit_pre = false
+# Enables the junit test in the post-commit hook
+config0.junit_post = false
+# May be used to specify additional parameters to the java compiler
+config0.junit.parameters =
+# May be used to specify additional elements for the classpath
+config0.junit.classpath =
+# The directory to be searched recursively for additional libraries
+config0.junit.libDir =
+# The path to the test suite jar, prefixed by junitSuitePath if relative. using
+# the configuration name if not given but junitSuitePath is given. 
+config0.junit.testSuiteJar =
+# Whether the console class in testSuiteInterface should be activated
+config0.junit.consoleActivate = true
+# The maximum time a test suite can run before the test will fail in
+#  milliseconds (default 2 minutes)
+config0.junit.timeout = 120000
+
+# Enables the war export test, that packages all submitted files as a .war archive
+#  and deploys them in a Tomcat instance by moving them to a specified directory.
+config0.war_export = false
+# The tomcat directory to move the .war files to
+config0.war_export.destination =

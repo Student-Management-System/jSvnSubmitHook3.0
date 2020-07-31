@@ -1,0 +1,10 @@
+If xmlOutput is set to true in hook.properties then the hook will send the test
+results in XML in the following format:
+
+<submitResults>
+    <message tool="checkstyle" type="error" file="Test.java" line="12" message="Wrong format"></message>
+    <message tool="junit" type="warning" file="" line="" message="Unable to run tests" />
+    <message tool="javac" type="error" file="Test.java" line="8" message="Compilation failed">
+        <example position="30">message</example>
+    </message>
+</submitResults>

@@ -21,7 +21,7 @@
 		<mkdir dir="${jSvnCommit.dest}"/>
 		<mkdir dir="${jSvnNotifier.dest}"/>
 		<mkdir dir="${testSuite.dest}"/>
-		<mkdir dir="testdata/filenameTest/filesNone">
+		<mkdir dir="testdata/filenameTest/filesNone"/>
 	</target>
 	
 	<target name="compile" depends="init" description="compiles the class files">

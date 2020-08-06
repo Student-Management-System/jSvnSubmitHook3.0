@@ -1,5 +1,6 @@
 package de.uni_hildesheim.sse.javaSvnHooks.tests.junit.testSuiteInterface;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -31,7 +33,7 @@ import de.uni_hildesheim.sse.javaSvnHooks.tests.junit.WrongPackageException;
  * 
  * @author Adam Krafczyk
  */
-public class ClassRegistry {
+public class ClassRegistry implements Closeable {
 
     private URLClassLoader classLoader;
     private Map<Class<?>, WrappedClass> classes;
@@ -140,7 +142,7 @@ public class ClassRegistry {
             String content = null;
             if (matchingJavaFile != null) {
                 // Read content of the java file
-                content = FileUtils.readFileToString(matchingJavaFile);
+                content = FileUtils.readFileToString(matchingJavaFile, StandardCharsets.UTF_8);
             }
             classes.put(clazz, new WrappedClass(clazz, matchingJavaFileName,
                     content));
@@ -320,9 +322,8 @@ public class ClassRegistry {
     }
     
     @Override
-    protected void finalize() throws Throwable {
+    public void close() throws IOException {
         classLoader.close();
-        super.finalize();
     }
     
 }

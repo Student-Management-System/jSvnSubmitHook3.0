@@ -5,7 +5,6 @@ import java.io.File;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.uni_hildesheim.sse.javaSvnHooks.tests.file_name.FileNameTest;
 import de.uni_hildesheim.sse.javaSvnHooks.tests.file_size.FileSizeTest;
 import de.uni_hildesheim.sse.javaSvnHooks.unitTests.utils.AbstractTest;
 import de.uni_hildesheim.sse.javaSvnHooks.unitTests.utils.TestConfiguration;

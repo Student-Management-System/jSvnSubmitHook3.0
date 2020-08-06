@@ -116,7 +116,7 @@ public class JavacTest extends AbstractJavaCompilationTest {
                 }
             }
             
-            org.apache.commons.io.FileUtils.write(file, builder.toString());
+            org.apache.commons.io.FileUtils.write(file, builder.toString(), StandardCharsets.UTF_8);
             
         } catch (IOException e) {
             e.printStackTrace();

@@ -25,13 +25,13 @@ public class OOExecuterUtils {
             if (null != parameters && parameters.length > 0) {
                 Class<?>[] parameterTypes = createParameterTypes(parameters);
                 Constructor<?> constructor = javaClass.getDeclaredConstructor(parameterTypes);
-                if (!constructor.isAccessible()) {
+                if (!constructor.canAccess(null)) {
                     constructor.setAccessible(true);
                 }
                 instance = constructor.newInstance(parameters);
             } else {
                 Constructor<?> constructor = javaClass.getDeclaredConstructor();
-                if (!constructor.isAccessible()) {
+                if (!constructor.canAccess(null)) {
                     constructor.setAccessible(true);
                 }
                 instance = constructor.newInstance();
@@ -64,13 +64,13 @@ public class OOExecuterUtils {
                 if (null != parameters && parameters.length > 0) {
                     Class<?>[] parameterTypes = createParameterTypes(parameters);
                     Method method = clazz.getDeclaredMethod(methodName, parameterTypes);
-                    if (!method.isAccessible()) {
+                    if (!method.canAccess(object)) {
                         method.setAccessible(true);
                     }
                     returnValue = method.invoke(object, parameters);
                 } else {
                     Method method = clazz.getDeclaredMethod(methodName);
-                    if (!method.isAccessible()) {
+                    if (!method.canAccess(object)) {
                         method.setAccessible(true);
                     }
                     returnValue = method.invoke(object);
@@ -110,13 +110,13 @@ public class OOExecuterUtils {
                     }
                     
                     Method method = clazz.getDeclaredMethod(methodName, parameterTypes);
-                    if (!method.isAccessible()) {
+                    if (!method.canAccess(object)) {
                         method.setAccessible(true);
                     }
                     returnValue = method.invoke(object, parameterValues);
                 } else {
                     Method method = clazz.getDeclaredMethod(methodName);
-                    if (!method.isAccessible()) {
+                    if (!method.canAccess(object)) {
                         method.setAccessible(true);
                     }
                     returnValue = method.invoke(object);

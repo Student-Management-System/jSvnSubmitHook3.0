@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.HashSet;
@@ -185,13 +186,13 @@ public class PostCommitHook extends CommitHook {
                 String pw = config.getStringProperty("reviewRepo.password", "submitHook");
                 SVNURL url = SVNURL.parseURIEncoded(reviewPath);
                 SVNClientManager clientManager = SVNClientManager.newInstance(null,
-                        new BasicAuthenticationManager(user, pw));
+                        BasicAuthenticationManager.newInstance(user, pw.toCharArray()));
                 SVNUpdateClient updateClient = clientManager.getUpdateClient();
                 updateClient.doCheckout(url, checkoutDir, SVNRevision.HEAD,
                         SVNRevision.HEAD, SVNDepth.INFINITY, true);
                 
                 File reviewTxt = new File(checkoutDir, "review.txt");
-                FileUtils.write(reviewTxt, content);
+                FileUtils.write(reviewTxt, content, StandardCharsets.UTF_8);
                 
                 clientManager.getWCClient().doAdd(reviewTxt, true, false, false,
                         SVNDepth.EMPTY, false, false);

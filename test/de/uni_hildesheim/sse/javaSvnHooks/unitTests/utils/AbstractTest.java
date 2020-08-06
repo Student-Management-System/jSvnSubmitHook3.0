@@ -25,7 +25,7 @@ public abstract class AbstractTest {
     static {
         if (!DEBUG) {
             Logger.INSTANCE.setOutputStream(
-                new PrintStream(new NullOutputStream()));
+                new PrintStream(NullOutputStream.NULL_OUTPUT_STREAM));
         }
     }
     

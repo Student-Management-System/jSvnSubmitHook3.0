@@ -357,6 +357,9 @@ public class JunitTest extends AbstractJavaCompilationTest {
         } else {
             exitCode = 2;
         }
+        
+        registry.close();
+        
         return exitCode;
     }
     

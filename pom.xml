@@ -59,7 +59,7 @@
 						<configuration>
 							<archive>
 								<manifest>
-									<mainClass>de.uni_hildesheim.sse.javaSvnHooks.pre_commit.PostCommitHook</mainClass>
+									<mainClass>de.uni_hildesheim.sse.javaSvnHooks.post_commit.PostCommitHook</mainClass>
 								</manifest>
 							</archive>
 							<descriptorRefs>

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-REPOSITORY=$1
-REV=$2
-HOOKDIR="/path/to/this/hook" # Change this according to your setup
+REPOSITORY="$1"
+REV="$2"
+HOOKDIR="$REPOSITORY/hooks/jSvnSubmitHook"
 
-java -jar $HOOKDIR/jSvnPostCommitHook.jar $REPOSITORY $REV $HOOKDIR
+java -jar "$HOOKDIR/jSvnPostCommitHook.jar" "$REPOSITORY" "$REV" "$HOOKDIR"
 
 exit $?

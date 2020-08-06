@@ -3,6 +3,7 @@ package de.uni_hildesheim.sse.javaSvnHooks.unitTests.tests;
 import java.io.File;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import de.uni_hildesheim.sse.javaSvnHooks.tests.file_name.FileNameTest;
@@ -19,6 +20,17 @@ public class FileNameTestTest extends AbstractTest {
 
     private static final File BASE = new File("testdata/filenameTest");
 
+    /**
+     * Create an empty directory testdata/filenameTest/filesNone as this is not tracked in git.
+     */
+    @Before
+    public void createFilesNone() {
+        File file = new File("testdata/filenameTest/filesNone");
+        if (!file.isDirectory()) {
+            file.mkdir();
+        }
+    }
+    
     @Override
     protected File getBase() {
         return BASE;

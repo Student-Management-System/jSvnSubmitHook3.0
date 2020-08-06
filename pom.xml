@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.ssehub.jsvnsubmithook</groupId>
 	<artifactId>jsvnsubmithook</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<name>jSvnSubmitHook</name>
 	<build>
 		<sourceDirectory>src</sourceDirectory>

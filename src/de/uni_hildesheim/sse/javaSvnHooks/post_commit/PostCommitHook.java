@@ -4,38 +4,24 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.commons.io.FileUtils;
-import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNURL;
-import org.tmatesoft.svn.core.auth.BasicAuthenticationManager;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
-import org.tmatesoft.svn.core.wc.SVNClientManager;
-import org.tmatesoft.svn.core.wc.SVNCommitClient;
-import org.tmatesoft.svn.core.wc.SVNRevision;
-import org.tmatesoft.svn.core.wc.SVNUpdateClient;
 import org.tmatesoft.svn.core.wc.admin.SVNLookClient;
 
 import de.uni_hildesheim.sse.javaSvnHooks.CommitHook;
+import de.uni_hildesheim.sse.javaSvnHooks.Configuration;
 import de.uni_hildesheim.sse.javaSvnHooks.PathConfiguration;
 import de.uni_hildesheim.sse.javaSvnHooks.logging.Logger;
 import de.uni_hildesheim.sse.javaSvnHooks.tests.Test;
 import de.uni_hildesheim.sse.javaSvnHooks.util.ExitCodes;
 import de.uni_hildesheim.sse.javaSvnHooks.util.ResultOutputStream;
-import de.uni_hildesheim.sse.javaSvnHooks.util.XmlUtilities;
 
 /**
  * Main class for post-commit-hooks. This class contains the main-method that
@@ -162,122 +148,31 @@ public class PostCommitHook extends CommitHook {
     }
     
     /**
-     * Commits the test result to the review repository.
+     * Sends a JSON message to the student management system containing the result of the submission-
      * 
-     * @param reviewPath The path to the review repository (e.g. /path/to/repo/configPath/group)
-     * @param content The content of the review.txt to be generated.
+     * @param repositoryPath The path inside the repository that was changed, without a leading /.
+     *          For example: Testblatt01Aufgabe01/JP001
+     * @param testOutput The result of the tests that ran. Typically this is formatted as XML
+     *          (if {@link Configuration#produceXmlOutput()} is true).
      * 
      * @return {@link ExitCodes#EXIT_ERROR} on error, {@link ExitCodes#EXIT_SUCCESS} otherwise.
      */
-    private int commitReview(String reviewPath, String content) {
+    private int notifyManagementSystem(String repositoryPath, String testOutput) {
         int exitCode = ExitCodes.EXIT_SUCCESS;
         
-        Logger.INSTANCE.log("Committing review.txt to " + reviewPath);
-        
-        File checkoutDir = new File(config.getTempDir(), config.getUniqueIdentifier() + "_review");
-        if (!checkoutDir.mkdir()) {
-            Logger.INSTANCE.log("Can't create temporary checkout directory for review");
-            exitCode = ExitCodes.EXIT_ERROR;
+        /*
+        String url = config.getStringProperty("managementSystemUrl", null);
+        if (url != null) {
+            String author = config.getCommitAuthor();
+            Logger.INSTANCE.log("[TODO] Send commit information to " + url);
+            Logger.INSTANCE.log("           author = " + author);
+            Logger.INSTANCE.log("           repositoryPath = " + repositoryPath);
+            Logger.INSTANCE.log("           testOutput = " + testOutput);
+            Logger.INSTANCE.log("           unrestrictedUser = " + config.isUnrestrictedUser(author));
         }
-        
-        try {
-            if (exitCode == ExitCodes.EXIT_SUCCESS) {
-                String user = config.getStringProperty("reviewRepo.user", "submitHook");
-                String pw = config.getStringProperty("reviewRepo.password", "submitHook");
-                SVNURL url = SVNURL.parseURIEncoded(reviewPath);
-                SVNClientManager clientManager = SVNClientManager.newInstance(null,
-                        BasicAuthenticationManager.newInstance(user, pw.toCharArray()));
-                SVNUpdateClient updateClient = clientManager.getUpdateClient();
-                updateClient.doCheckout(url, checkoutDir, SVNRevision.HEAD,
-                        SVNRevision.HEAD, SVNDepth.INFINITY, true);
-                
-                File reviewTxt = new File(checkoutDir, "review.txt");
-                FileUtils.write(reviewTxt, content, StandardCharsets.UTF_8);
-                
-                clientManager.getWCClient().doAdd(reviewTxt, true, false, false,
-                        SVNDepth.EMPTY, false, false);
-                
-                SVNCommitClient client = clientManager.getCommitClient();
-                client.doCommit(new File[] {checkoutDir}, false,
-                        "Automatic Hook Review", null, null, false, false, SVNDepth.INFINITY);
-            }
-        } catch (SVNException e) {
-            Logger.INSTANCE.logException(e, false);
-            exitCode = ExitCodes.EXIT_ERROR;
-        } catch (IOException e) {
-            Logger.INSTANCE.logException(e, false);
-            exitCode = ExitCodes.EXIT_ERROR;
-        }
-        
-        try {
-            FileUtils.deleteDirectory(checkoutDir);
-        } catch (IOException e) {
-            Logger.INSTANCE.logException(e, false);
-        }
+        */
         
         return exitCode;
-    }
-    
-    /**
-     * Notifies a web hook about the commit.
-     * 
-     * @param repositoryPath The path inside the repository that was changed.
-     * 
-     * @return {@link ExitCodes#EXIT_ERROR} on error, {@link ExitCodes#EXIT_SUCCESS} otherwise.
-     */
-    private int notifyWebHook(String repositoryPath) {
-        Charset charset = Charset.forName("UTF-8");
-        String url = config.getStringProperty("webHookAddress", null);
-        
-        int status = ExitCodes.EXIT_SUCCESS;
-        
-        if (url != null) {
-            Logger.INSTANCE.log("Notifying web hook " + url);
-            
-            StringBuilder content = new StringBuilder();
-            content.append("<commit>");
-            content.append("<path>");
-            content.append(XmlUtilities.xmlify(repositoryPath));
-            content.append("</path>");
-            content.append("<commitAuthor>");
-            content.append(XmlUtilities.xmlify(config.getCommitAuthor()));
-            content.append("</commitAuthor>");
-            content.append("<commitComment>");
-            content.append(XmlUtilities.xmlify(config.getCommitComment()));
-            content.append("</commitComment>");
-            content.append("</commit>");
-            
-            try {
-                URLConnection con = new URL(url).openConnection();
-                con.setDoOutput(true); // sets to POST
-                con.setRequestProperty("Accept", "*/*");
-                con.setRequestProperty("Accept-Charset", charset.name());
-                con.setRequestProperty("Content-Type", "text/xml; charset=" + charset.name());
-                con.setRequestProperty("x-hook-id", "f31710cc25da40c462e6d98296637c8c8755796bcca0f16948f41cf1e930cecf");
-                
-                OutputStream out = con.getOutputStream();
-                out.write(content.toString().getBytes(charset));
-                out.close();
-                
-                InputStream in = con.getInputStream();
-                ByteArrayOutputStream answer = new ByteArrayOutputStream(512);
-                int read;
-                while ((read = in.read()) != -1) {
-                    answer.write(read);
-                }
-                in.close();
-                String result = new String(answer.toByteArray(), charset);
-                if (result.length() > 0) {
-                    Logger.INSTANCE.log("Answer from web hook:\n" + result);
-                }
-                
-            } catch (IOException e) {
-                Logger.INSTANCE.logException(e, false);
-                status = ExitCodes.EXIT_FAIL;
-            }
-        }
-        
-        return status;
     }
     
     /**
@@ -336,20 +231,10 @@ public class PostCommitHook extends CommitHook {
             Path checkoutDirPath = config.getCheckoutDir().toPath();
             for (File f : new File(config.getCheckoutDir(), pathConfiguration.getPath()).listFiles()) {
                 String repositoryPath = checkoutDirPath.relativize(f.toPath()).toString();
-                
-                // Commit to review repository, if user is restricted
-                int status = ExitCodes.EXIT_SUCCESS;
-                if (config.isUnrestrictedUser(config.getCommitAuthor())) {
-                    Logger.INSTANCE.log("Author is an unrestricted user, skipping export to review-repo.");
-                } else {
-                    String reviewPath = config.getStringProperty("reviewRepo", "") + "/" + repositoryPath;
-                    status = commitReview(reviewPath, testOutput);
-                    if (status != ExitCodes.EXIT_SUCCESS) {
-                        returnValue = status;
-                    }
-                }
-                // Notify the web interface
-                status = notifyWebHook(repositoryPath);
+
+                // notify the student management system
+                int status;
+                status = notifyManagementSystem(repositoryPath, testOutput);
                 if (status != ExitCodes.EXIT_SUCCESS) {
                     returnValue = status;
                 }

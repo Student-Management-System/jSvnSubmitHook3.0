@@ -65,6 +65,7 @@
 								<descriptorRef>jar-with-dependencies</descriptorRef>
 							</descriptorRefs>
 							<finalName>jSvnPreCommitHook-${project.version}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
 						</configuration>
 						<phase>package</phase>
 						<goals>
@@ -83,6 +84,7 @@
 								<descriptorRef>jar-with-dependencies</descriptorRef>
 							</descriptorRefs>
 							<finalName>jSvnPostCommitHook-${project.version}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
 						</configuration>
 						<phase>package</phase>
 						<goals>

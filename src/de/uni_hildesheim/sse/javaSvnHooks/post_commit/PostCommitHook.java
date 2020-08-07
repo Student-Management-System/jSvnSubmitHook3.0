@@ -148,7 +148,7 @@ public class PostCommitHook extends CommitHook {
     }
     
     /**
-     * Sends a JSON message to the student management system containing the result of the submission-
+     * Sends a JSON message to the student management system containing the result of the submission.
      * 
      * @param repositoryPath The path inside the repository that was changed, without a leading /.
      *          For example: Testblatt01Aufgabe01/JP001

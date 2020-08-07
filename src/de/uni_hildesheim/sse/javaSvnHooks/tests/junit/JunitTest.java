@@ -299,7 +299,6 @@ public class JunitTest extends AbstractJavaCompilationTest {
         }
         // Create a ClassRegistry object and tell the test suite about it
         Logger.INSTANCE.log("Creating Registry for " + homeDir.getAbsolutePath());
-
         ClassRegistry registry = null;
         try {
             registry = new ClassRegistry(homeDir, 
@@ -338,14 +337,12 @@ public class JunitTest extends AbstractJavaCompilationTest {
         } catch (NoSuchMethodException e) {
             // Probably older test suite version
         }
-        // Set user.dir to homeDir, to allow relative file paths in executed
-        // code
+        // Set user.dir to homeDir, to allow relative file paths in executed code
         String previousUserDir = System.getProperty("user.dir");
         System.setProperty("user.dir", homeDir.getAbsolutePath());
         
         // Run the Unit tests
         boolean timedOut = runUnitTests(testSuiteClass, testResult, securityManager);
-        
         System.setProperty("user.dir", previousUserDir);
         Console.INSTANCE.deaktivieren();
         if (!timedOut) {
@@ -357,9 +354,7 @@ public class JunitTest extends AbstractJavaCompilationTest {
         } else {
             exitCode = 2;
         }
-        
         registry.close();
-        
         return exitCode;
     }
     

@@ -49,6 +49,12 @@ class PreCommitSvnCatHandler implements ISVNChangeEntryHandler, ISVNTreeHandler 
         changedFiles = new ArrayList<String>();
     }
     
+    /**
+     * Checks out the given repository path using the <code>svnlook</code> utility program.
+     * 
+     * @param path The path inside the repository to check out.
+     * @param target The target file location to write the file to.
+     */
     private void checkoutWithSvnlookProcess(String path, File target) {
         
         ProcessBuilder pb = new ProcessBuilder(
@@ -85,6 +91,18 @@ class PreCommitSvnCatHandler implements ISVNChangeEntryHandler, ISVNTreeHandler 
         }
     }
     
+    /**
+     * Checks out the given path in the repository using the svnkit library.
+     * <p>
+     * <b>Note:</b> There occurred a strange bug inside of svnkit, where checking out files in the pre-commit hook
+     * sometimes failed inexplicably. For this reason, {@link #checkoutWithSvnlookProcess(String, File)} was created
+     * as a replacement.
+     * 
+     * @param path The path inside the repository to check out.
+     * @param target The target file location to write the file to.
+     * 
+     * @throws SVNException If the checkout fails.
+     */
     @SuppressWarnings("unused")
     private void checkoutWithSvnkit(String path, File target) throws SVNException {
         try (FileOutputStream fos = new FileOutputStream(target)) {
@@ -96,6 +114,13 @@ class PreCommitSvnCatHandler implements ISVNChangeEntryHandler, ISVNTreeHandler 
         }
     }
 
+    /**
+     * Checks out the given file in the repository to the checkout directory.
+     * 
+     * @param path The path inside the repository.
+     * 
+     * @throws SVNException If checking out the file fails.
+     */
     private void writeFileToCheckoutDir(String path) throws SVNException {
         changedFiles.add(path);
         
@@ -112,7 +137,8 @@ class PreCommitSvnCatHandler implements ISVNChangeEntryHandler, ISVNTreeHandler 
     
     @Override
     public void handleEntry(SVNChangeEntry entry) throws SVNException {
-//        Logger.INSTANCE.log("handleEntry(path=" + entry.getPath() + ", type=" + entry.getType() + ", kind=" + entry.getKind() + ")");
+//        Logger.INSTANCE.log("handleEntry(path=" + entry.getPath() + ", type=" + entry.getType()
+//                + ", kind=" + entry.getKind() + ")");
         
         if (entry.getKind() == SVNNodeKind.FILE && !isFileIgnored(entry.getPath())
                 && entry.getType() != SVNChangeEntry.TYPE_DELETED) {

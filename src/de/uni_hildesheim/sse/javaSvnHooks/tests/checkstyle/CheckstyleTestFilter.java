@@ -27,7 +27,7 @@ public class CheckstyleTestFilter extends JavadocTestFilter {
     private static final Pattern EXC_PATTERN;
     private static final Pattern EXC_LINE_PATTERN;
     
-    private static final StatusPrefix[] statusPrefix = {
+    private static final StatusPrefix[] STATUS_PREFIX = {
         new StatusPrefix("[ERROR]", MessageUtils.TYPE_ERROR),
         new StatusPrefix("[WARNING]", MessageUtils.TYPE_WARNING),
         new StatusPrefix("[WARN]", MessageUtils.TYPE_WARNING)};
@@ -161,7 +161,7 @@ public class CheckstyleTestFilter extends JavadocTestFilter {
 
     @Override
     protected StatusPrefix[] getStatusPrefixes() {
-        return statusPrefix;
+        return STATUS_PREFIX;
     }
     
     @Override

@@ -39,7 +39,6 @@ public class JavaClasspath {
      *        appended
      * @param pathConfiguration the configuration to be considered
      * @param keyPrefix the key prefix denoting the name of the checker
-     * @return the combined classpath
      * 
      * @since 1.00
      */
@@ -104,6 +103,12 @@ public class JavaClasspath {
         return classpath;
     }
     
+    /**
+     * Appends the given entry to the classpath.
+     * 
+     * @param classpath The classpath list to append the entry to.
+     * @param entry The entry to append.
+     */
     public static void appendToClasspath(List<String> classpath, String entry) {
         if (null != entry && entry.length() > 0) {
             // in case of multiple entries, parse out individual ones
@@ -125,6 +130,14 @@ public class JavaClasspath {
         }
     }
     
+    /**
+     * Internal helper method for {@link #appendToClasspath(List, String)}.
+     * 
+     * @param classpath The classpath list.
+     * @param entry The entry to append.
+     * @param start
+     * @param end
+     */
     private static void appendEntryToClasspath(List<String> classpath, 
         String entry, int start, int end) {
         if (end > start) {
@@ -139,6 +152,13 @@ public class JavaClasspath {
         }
     }
         
+    /**
+     * Converts the given classpath list to a string.
+     * 
+     * @param classpath The classpath list.
+     * 
+     * @return The same classpath as a string representation.
+     */
     public static String classpathToString(List<String> classpath) {
         String result = "";
         for (int i = 0; i < classpath.size(); i++) {

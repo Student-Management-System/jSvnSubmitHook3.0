@@ -86,7 +86,8 @@ public class OOAnalyzer {
      * Checks whether there exist a class which fulfills the specification of the homework.
      * @param visibility The specified visibility or <tt>null</tt> if no visibility was specified by us.
      * @param modifier The specified modifier (abstract or final) or <tt>null</tt> if no modifier was specified by us.
-     * @param mustExist if <code>true</code> leads to an error message if the class does not exist, no error message if <code>false</code>
+     * @param mustExist if <code>true</code> leads to an error message if the class does not exist, no error message
+     *      if <code>false</code>
      * @return <tt>true</tt> if at least one class could be found inside the submission, which fulfills the
      *     specification completely, <tt>false</tt> otherwise.
      * @see #isInterface()
@@ -101,9 +102,9 @@ public class OOAnalyzer {
     }
     
     /**
-     * Short cut for {@link #classExists(Visibility, Modifier, boolean)} if no visibility and no modifier where specified for
-     * the class itself. Leads to an error if the class does not exist.
-     * @return <tt>true</tt> if at least one class could be found inside the submission, which fulfills the
+     * Short cut for {@link #classExists(Visibility, Modifier, boolean)} if no visibility and no modifier where
+     * specified for the class itself. Leads to an error if the class does not exist.
+     * @return <tt>true</tt> if at least one class could be found inside the submission, which fullfills the
      *     specification completely, <tt>false</tt> otherwise.
      * @see #classExists(Visibility, Modifier, boolean)
      * @see #isInterface()
@@ -113,9 +114,10 @@ public class OOAnalyzer {
     }
 
     /**
-     * Short cut for {@link #classExists(Visibility, Modifier, boolean)} if no visibility and no modifier where specified for
-     * the class itself.
-     * @param mustExist if <code>true</code> leads to an error message if the class does not exist, no error message if <code>false</code>
+     * Short cut for {@link #classExists(Visibility, Modifier, boolean)} if no visibility and no modifier where
+     * specified for the class itself.
+     * @param mustExist if <code>true</code> leads to an error message if the class does not exist, no error message
+     *     if <code>false</code>
      * @return <tt>true</tt> if at least one class could be found inside the submission, which fulfills the
      *     specification completely, <tt>false</tt> otherwise.
      * @see #classExists(Visibility, Modifier, boolean)

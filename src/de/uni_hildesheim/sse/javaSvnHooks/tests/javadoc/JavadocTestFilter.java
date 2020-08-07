@@ -19,6 +19,13 @@ import de.uni_hildesheim.sse.javaSvnHooks.util.XmlUtilities;
  */
 public class JavadocTestFilter implements ITestMessageFilter {
     
+    private static final StatusPrefix[] STATUS_PREFIX = {
+        new StatusPrefix("error -", MessageUtils.TYPE_ERROR),
+        new StatusPrefix("warning -", MessageUtils.TYPE_WARNING)};
+    
+    /**
+     * A status prefix.
+     */
     protected static class StatusPrefix {
         private String prefix;
         private String type;
@@ -75,10 +82,6 @@ public class JavadocTestFilter implements ITestMessageFilter {
     
     private PathConfiguration pathConfiguration;
     
-    private static final StatusPrefix[] statusPrefix = {
-        new StatusPrefix("error -", MessageUtils.TYPE_ERROR),
-        new StatusPrefix("warning -", MessageUtils.TYPE_WARNING)};
-
     /**
      * Stores if an error was detected so far.
      * 
@@ -295,7 +298,7 @@ public class JavadocTestFilter implements ITestMessageFilter {
      * @return the status prefixes
      */
     protected StatusPrefix[] getStatusPrefixes() {
-        return statusPrefix;
+        return STATUS_PREFIX;
     }
 
     /**

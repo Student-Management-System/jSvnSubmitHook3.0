@@ -102,6 +102,29 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<configuration>
+					<inclNoLocationClasses>false</inclNoLocationClasses>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>coverage-report</id>
+						<phase>report</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>3.1.1</version>
@@ -114,7 +137,7 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>validate</id>
+						<id>checkstyle</id>
 						<phase>validate</phase>
 						<goals>
 							<goal>checkstyle</goal>

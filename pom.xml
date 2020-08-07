@@ -2,10 +2,24 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>net.ssehub.jsvnsubmithook</groupId>
 	<artifactId>jsvnsubmithook</artifactId>
 	<version>3.0.0-SNAPSHOT</version>
+
 	<name>jSvnSubmitHook</name>
+
+	<organization>
+		<name>Software Systems Engineering, University of Hildesheim</name>
+		<url>https://sse.uni-hildesheim.de/</url>
+	</organization>
+
+	<scm>
+		<connection>scm:git:https://github.com/Student-Management-System/jSvnSubmitHook3.0</connection>
+		<developerConnection>scm:git:https://github.com/Student-Management-System/jSvnSubmitHook3.0</developerConnection>
+		<url>https://github.com/Student-Management-System/jSvnSubmitHook3.0</url>
+	</scm>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources></resources>
@@ -15,6 +29,7 @@
 				<directory>testdata</directory>
 			</testResource>
 		</testResources>
+
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -23,6 +38,7 @@
 					<release>11</release>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.2.0</version>
@@ -33,6 +49,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
@@ -76,9 +93,11 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

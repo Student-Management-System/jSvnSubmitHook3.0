@@ -136,6 +136,9 @@
 					<consoleOutput>true</consoleOutput>
 					<failsOnError>false</failsOnError>
 					<linkXRef>false</linkXRef>
+					<includeResources>false</includeResources>
+          <includeTestResources>false</includeTestResources>
+          <includeTestSourceDirectory>false</includeTestSourceDirectory>
 				</configuration>
 			</plugin>
 		</plugins>

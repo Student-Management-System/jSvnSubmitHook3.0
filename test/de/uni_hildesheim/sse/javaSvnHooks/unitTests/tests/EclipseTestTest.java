@@ -28,7 +28,7 @@ public class EclipseTestTest extends AbstractTest {
     protected TestConfiguration createConfig() {
         TestConfiguration config = createConfig("sub.properties", 
                 new EclipseConfigurationTest(), new JavacTest());
-            config.setHookDirectory(BASE.getAbsoluteFile());
+        config.setHookDirectory(BASE.getAbsoluteFile());
         return config;
     }
 

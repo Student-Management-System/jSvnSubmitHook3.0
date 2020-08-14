@@ -155,13 +155,10 @@
 	</properties>
 
 	<dependencies>
-		<!-- Manually added since it is not available in a public repository -->
 		<dependency>
 			<groupId>ssehub.net.studentmgmt</groupId>
 			<artifactId>submitter-protocol</artifactId>
 			<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/include/submitter-protocol-0.0.1-jar-with-all-dependencies.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
